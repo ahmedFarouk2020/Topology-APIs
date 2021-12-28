@@ -12,12 +12,14 @@ using json = nlohmann::json;
 #include "APIS.hpp"
 
 int main() {
+
+
     APIS apis = APIS();
-    cout<< apis.readJSON("topology.json") << "\n\n";
+    //cout<< apis.readJSON("topology.json") << "\n\n";
 
     cout<< apis.writeJSON("top2")<< "\n\n";
 
-    cout<< "Devices: \n" << apis.queryDevicesWithNetlistNode("top1","drain");
+    cout<< "Devices: \n" << apis.deleteTopology("top5");
 
     return 0;
 }

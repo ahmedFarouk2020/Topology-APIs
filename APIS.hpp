@@ -6,24 +6,26 @@ typedef string Result;
 class APIS
 {
 private:
-    /* data */
+
     Topology topology;
     ComponentList component_list;
+
 public:
     /******* Read json file and store the content in memory(topologyList)
-     * Args: filename(string)
+     * Args: 
+     *      filename(string)
      * return: 
-     *      filename(Result): file name of the source file
+     *      filename(Result): filename of the source file
      */
     Result readJSON(std::string filename) {
-        // read using ifstream object
+
+        // read content using ifstream object
         ifstream i_file(filename);
 
-        // pass it to json object
+        // store the content as json object
         this->topology.create(json::parse(i_file));
 
-        cout<< "reading........\n\n";
-
+        // add the content(topology) to memory (TopologyList) 
         this->topology.append();
 
         return filename;
@@ -31,10 +33,12 @@ public:
     }
 
 
-    /******* write a topology in json format from memory to a .json file
-     * Args: filename(string)
+    /******* write a topology from memory to a .json file
+     * 
+     * Args: 
+     *      filename(string)
      * return: 
-     *      filename(Result): file name of the saved file
+     *      filename(Result): filename of the saved file
      */
     Result writeJSON(string topology_ID) {
 
@@ -54,16 +58,14 @@ public:
      *      topologyId(string)
      * 
      * return:
-     *      Result(string): "deleted"
+     *      Result(string): topology ID of deleted one
+     * OR
+     *      null(string): no matched data
      * 
      */
     Result deleteTopology(string topologyId) {
        
-        this->topology.erase(topologyId);
-
-        cout<< "Deleting..." << "\n";
-
-        return "deleted";
+        return this->topology.erase(topologyId);
     }
 
     /****** retrieve all topologies in memory
@@ -71,7 +73,7 @@ public:
      * Args: void
      * 
      * return: 
-     *      -topologyList
+     *      topologyList
      * 
      */
     TopologyList queryTopologies(void) {
@@ -79,27 +81,28 @@ public:
         return this->topology.getAll();
     }
 
-    /****** retrieve all components a topology
+    /****** retrieve all components in a topology
      *
      * Args: topologyId(string)
      * 
      * return: 
-     *      -Componentlist(nlohmann::json)
+     *      Componentlist(json)
      * 
      */
     Componentlist queryDevices(string topologyId) {
-        return this->component_list.get(topologyId);
+        return this->component_list.retrieve(topologyId);
     }
 
-    /****** retrieve all components in a given topology connected in a 
-     *      given netlist node id
+
+    /****** retrieve all components in a given topology connected to a 
+     *      given netlist node
      *
      * Args: 
      *      -topology Id(string)
      *      -netlistNode Id(string)
      * 
      * return: 
-     *      -DeviceList(nlohmann::json)
+     *      DeviceList(json)
      * 
      */
     json queryDevicesWithNetlistNode(string topologyId, string netlistNodeId) {

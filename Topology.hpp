@@ -1,27 +1,16 @@
 #ifndef TOPOLOGY_HPP_
 #define TOPOLOGY_HPP_
 
-
+/*
+*** provide all methods and data to deal with topologies
+ *
+ *  Methods: create, append, retrieve, erase, getAll
+ */
 
 class Topology: public Utils
 {
 private:
-    /* data */
     json topology;
-
-    
-    int search(string id) {
-        int index = 0;
-        for( json& topology : TopologyDB::topology_list) {
-            if(topology["id"] == id) {
-                cout<< "\n" <<"Topology in index: " << index<< "\n";
-                return index;
-            }
-            index++;
-        }
-        return -1;
-    }
-
     
 
 public:
@@ -30,14 +19,29 @@ public:
         this-> topology = topology;
     }
 
-
+    /* Store a json object locally and treat it as topology
+     *
+     * Args: 
+     *      topology(json)
+     * 
+     * return: void
+     */
     void create(json topology){
         // store topology ID
         this-> topology = topology;
 
     }
 
-
+    /* retrieve a topology from memory with Id
+     *
+     * Args: 
+     *      topologyId(string)
+     * 
+     * return: 
+     *      topology(json) -> retrieved topology
+     * OR
+     *      nullptr -> no matching data
+     */ 
     json retrieve(string topologyId) {
         int index = this->search(topologyId);
         if(index >= 0)
@@ -46,14 +50,39 @@ public:
             return nullptr;
     }
 
+    /* push back a topology(stored in private data) to memory 
+     *
+     * Args: void
+     * 
+     * return: void
+     */ 
     void append(void) {
         TopologyDB::topology_list.push_back(this->topology);
     }
-    void erase(string topologyId) {
+
+    /* remove a topology from memory using topology Id
+     *
+     * Args: 
+     *      topologyId(string)
+     * 
+     * return: topologyId
+     */ 
+    string erase(string topologyId) {
         int index = this->search(topologyId);
+        if(index < 0) {
+            return "null";
+        }
         TopologyDB::topology_list.erase(TopologyDB::topology_list.begin()+index);
+        return topologyId;
     }
 
+    /* retrieve all topologies from memory
+     *
+     * Args: void
+     * 
+     * return: 
+     *      topologyList(json::array)
+     */ 
     TopologyList getAll(void) {
         return TopologyDB::topology_list;
     }

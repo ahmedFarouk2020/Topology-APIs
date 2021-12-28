@@ -1,18 +1,31 @@
 #if !defined(UTILS_HPP_)
 #define UTILS_HPP_
 
-class Utils: public TopologyDB
+
+/*
+*** Provide common methods to be used within modules
+ */
+
+class Utils: protected TopologyDB
 {
 
 protected:
-    virtual void create(json components_list) {}
-    virtual json get(string id) { return nullptr; }
+    Utils(){} // protected constructor
 
-    /***** search for topology in topologyList with topology ID
+    /*
+    *** Virtual methods (interfaces) for `ComponentsList` and `Topology` classes
+    */
+    virtual void create(json components_list) {}
+    virtual json retrieve(string id) { return nullptr; }
+
+
+
+    /***** Search for topology in topologyList with topology ID
      *
      * Args: topologyID(string)
      * return: 
-     *      -topology index in topologyList
+     *      -topology index inside topologyList
+     * OR
      *      -int(-1) if no matched topology
      */
     int search(string id) {
