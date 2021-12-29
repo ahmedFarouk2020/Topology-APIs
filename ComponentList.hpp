@@ -14,7 +14,7 @@ private:
     Componentlist components_list;
 
     
-public:
+protected:
     ComponentList(Componentlist components_list = nullptr) {
         this->components_list = components_list;
     }

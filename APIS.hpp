@@ -3,18 +3,16 @@
 
 typedef string Result;
 
-class APIS
+class APIS : protected Topology, ComponentList
 {
 private:
-
-    Topology topology;
-    ComponentList component_list;
 
     string generateFilename(string& topology_ID) {
         return topology_ID + ".json";
     }
 
 public:
+
     /******* Read json file and store the content in memory(topologyList)
      * Args: 
      *      filename(string)
@@ -35,10 +33,10 @@ public:
         else   // file exists
         {
             // store the content as json object
-            this->topology.create(json::parse(i_file));
+            Topology::create(json::parse(i_file));
 
             // add the content(topology) to memory (TopologyList) 
-            this->topology.append();
+            Topology::append();
 
             return filename;
         }
@@ -60,7 +58,7 @@ public:
         // generate filename <topologyId>.json
         string filename = this->generateFilename(topology_ID);
 
-        json topology = this->topology.retrieve(topology_ID);
+        json topology = Topology::retrieve(topology_ID);
 
         if(topology == nullptr) // invalid topology ID
         {
@@ -88,7 +86,7 @@ public:
      */
     Result deleteTopology(string topologyId) {
        
-        return this->topology.erase(topologyId);
+        return Topology::erase(topologyId);
     }
 
     /****** retrieve all topologies in memory
@@ -101,7 +99,7 @@ public:
      */
     TopologyList queryTopologies(void) {
 
-        return this->topology.getAll();
+        return Topology::getAll();
     }
 
     /****** retrieve all components in a topology
@@ -115,7 +113,7 @@ public:
      * 
      */
     Componentlist queryDevices(string topologyId) {
-        return this->component_list.retrieve(topologyId);
+        return ComponentList::retrieve(topologyId);
     }
 
 
@@ -133,7 +131,7 @@ public:
      * 
      */
     json queryDevicesWithNetlistNode(string topologyId, string netlistNodeId) {
-        return this->component_list.getWithNetlist(topologyId,netlistNodeId);
+        return this->ComponentList::getWithNetlist(topologyId,netlistNodeId);
     }
 
 

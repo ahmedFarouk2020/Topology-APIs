@@ -7,15 +7,16 @@
  *  Methods: create, append, retrieve, erase, getAll
  */
 
-class Topology: public Utils
+class Topology: protected Utils
 {
 private:
     json topology;
     
 
-public:
+protected:
     Topology(json topology = nullptr){
         this-> topology = topology;
+        cout<< "\n\ntopology created\n\n";
     }
 
     /* Store a json object locally and treat it as topology

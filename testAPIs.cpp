@@ -16,6 +16,7 @@ int main() {
 
     APIS apis = APIS();
 
+
     cout<< "\nTesting \"readJSON\" API....\n\n";
     cout<< "testcase1: Read a non-existing file\n";
     cout<< "Expected output: "<< "null\n";
@@ -37,7 +38,6 @@ int main() {
 
 
 
-
     cout<< "Testing \"queryDevices\" API....\n\n";
     cout<< "testcase1: Retrieve all devices in a valid topology\n";
     cout<< "Expected output: "<< "list of all device topology\n";
@@ -46,6 +46,8 @@ int main() {
     cout<< "Expected output: "<< "null\n" ;
     cout<< "Actual output: " <<apis.queryDevices("top2") << "\n\n";
     cout<< "-----------------------------------------\n\n";
+
+
 
     cout<< "Testing \"queryDevicesWithNetlistNode\" API....\n\n";
     cout<< "testcase1: Retrieve all devices in a valid topology that connects to valid netlistnode ID\n";
@@ -62,6 +64,8 @@ int main() {
     cout<< "Actual output: " <<apis.queryDevicesWithNetlistNode("top1","a2") << "\n\n";
     cout<< "-----------------------------------------\n\n";
 
+
+
     cout<< "Testing \"queryTopologies\" API....\n\n";
     cout<< "testcase1: Retrieve all topologies from a non-empty \n";
     cout<< "Expected output: "<< "list of all topologies\n";
@@ -71,6 +75,8 @@ int main() {
     cout<< "Expected output: "<< "empty list\n";
     cout<< "Actual output: " <<apis.queryTopologies() << "\n\n";
     cout<< "-----------------------------------------\n\n";
+
+
 
     cout<< "Testing \"deleteTopology\" API....\n\n";
     cout<< "testcase1: Delete a non-existing topology\n";
