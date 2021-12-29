@@ -3,7 +3,7 @@ Provide the functionality to access, manage and store device topologies
 
 # Prerequisites
 * gcc compiler
-* [nlohmann json library](https://github.com/nlohmann/json) (included in repo here)
+* [nlohmann json library](https://github.com/nlohmann/json) (optional) <br>
 ``` If compilation problems happen, Download it (almost works fine)```
 
 # Tools Used
