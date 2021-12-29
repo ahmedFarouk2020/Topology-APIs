@@ -1,13 +1,23 @@
 #if !defined(APIS_HPP_)
 #define APIS_HPP_
 
+typedef json Componentlist;
 typedef string Result;
+
+/*
+***  Contains public APIs that user can use 
+
+ *   Private methods: generateFilename
+ * 
+ *   Public methods(APIs): readJSON, writeJSON, queryTopologies, queryDevices, 
+ *                         queryDevicesWithNetlistNode
+ */
 
 class APIS : protected Topology, ComponentList
 {
 private:
 
-    string generateFilename(string& topology_ID) {
+    string generateFilename(const string& topology_ID) {
         return topology_ID + ".json";
     }
 
@@ -131,7 +141,7 @@ public:
      * 
      */
     json queryDevicesWithNetlistNode(string topologyId, string netlistNodeId) {
-        return this->ComponentList::getWithNetlist(topologyId,netlistNodeId);
+        return ComponentList::getWithNetlistNode(topologyId,netlistNodeId);
     }
 
 

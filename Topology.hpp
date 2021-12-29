@@ -1,6 +1,8 @@
 #ifndef TOPOLOGY_HPP_
 #define TOPOLOGY_HPP_
 
+
+
 /*
 *** provide all methods and data to deal with topologies
  *
@@ -16,7 +18,6 @@ private:
 protected:
     Topology(json topology = nullptr){
         this-> topology = topology;
-        cout<< "\n\ntopology created\n\n";
     }
 
     /* Store a json object locally and treat it as topology
