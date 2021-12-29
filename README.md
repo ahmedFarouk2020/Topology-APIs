@@ -13,4 +13,4 @@ Provide the functionality to access, manage and store device topologies
 * See [Design folder](https://github.com/ahmedFarouk2020/Topology-APIs/tree/master/design)
 
 # Static analysis
-* See [analysis folder](https://github.com/ahmedFarouk2020/Topology-APIs/tree/master/analysis) -> All style problems are from `json lib` :)
+* See [analysis folder](https://github.com/ahmedFarouk2020/Topology-APIs/tree/master/analysis) -> All style problems are from `json lib` :) and only one from my modules but ignored it due to readability and design purposes
