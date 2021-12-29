@@ -63,7 +63,7 @@ protected:
      *      nullptr: no matched components
      * 
      */
-    json getWithNetlistNode(const string& topology_id,const string& id) {
+    json getWithNetlistNode(const string& topology_id,const string& netlistNodeId) {
         int topology_index = search(topology_id); 
 
         // invalid topology ID
@@ -74,8 +74,8 @@ protected:
             // search for netlist node ID in the topology components
             for(json& comp: TopologyDB::topology_list[topology_index]["components"]) {
 
-                // return netlist node ID if found
-                if(comp["netlist"][id] != nullptr) {
+                // return the component when netlist node ID is found
+                if(comp["netlist"][netlistNodeId] != nullptr) {
                     return comp;
                 }
             }
