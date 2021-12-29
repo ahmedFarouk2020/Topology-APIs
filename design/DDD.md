@@ -3,8 +3,7 @@
 ## The design consists of five classes
 - APIS: contains public functions the user can use
 
-- Topology: represent an essensial unit in design because we deals with topologies and 	
-perform all operations on them using this class `Topology`
+- Topology: represent an essensial unit in design because we deals with topologies and perform all operations on them using this class `Topology`
 
 - ComponentsList: deals with Components lists and unable us to manage components
 
@@ -13,4 +12,4 @@ perform all operations on them using this class `Topology`
 - TopologyDB: represent all topologies in memory and it is inhereted by Utils
 
 # UML Design
-[](./TopologyAPIs_UML.png)
+[](../images/TopologyAPIs_UML.png)
