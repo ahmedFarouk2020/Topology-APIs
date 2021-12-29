@@ -15,8 +15,8 @@ protected:
     /*
     *** Virtual methods (interfaces) for `ComponentsList` and `Topology` classes
     */
-    virtual void create(json components_list) {}
-    virtual json retrieve(string id) { return nullptr; }
+    virtual void create(json obj) {}
+    virtual json retrieve(string& Id) { return nullptr; }
 
 
 
@@ -28,11 +28,10 @@ protected:
      * OR
      *      -int(-1) if no matched topology
      */
-    int search(string id) {
+    int search(const string& id) {
         int index = 0;
         for( json& topology : TopologyDB::topology_list) {
             if(topology["id"] == id) {
-                cout<< "Topology in index: " << index<< "\n";
                 return index;
             }
             index++;

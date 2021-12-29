@@ -15,8 +15,7 @@ private:
 
     
 public:
-    ComponentList() {}
-    ComponentList(Componentlist components_list) {
+    ComponentList(Componentlist components_list = nullptr) {
         this->components_list = components_list;
     }
 
@@ -27,7 +26,7 @@ public:
      * 
      * return: void
      */
-    void create(Componentlist components_list) {
+    void create(Componentlist components_list) override {
         this->components_list = components_list;
     }
 
@@ -42,7 +41,7 @@ public:
      * OR
      *      nullptr -> no matching data
      */ 
-    Componentlist retrieve(string id) {
+    Componentlist retrieve(string& id) override {
         int topology_index = search(id);
         if(topology_index < 0) {
             return nullptr;
@@ -64,17 +63,23 @@ public:
      *      nullptr: no matched components
      * 
      */
-    Componentlist getWithNetlist(string top_id,string id) {
-        int topology_index = search(top_id); 
+    Componentlist getWithNetlist(const string& topology_id,const string& id) {
+        int topology_index = search(topology_id); 
 
+        // invalid topology ID
         if(topology_index < 0) {
             return nullptr;
         }
-        
-        for(json& comp: TopologyDB::topology_list[topology_index]["components"]) {
-            if(comp["netlist"][id] != nullptr) {
-                return comp;
+        else {
+            // search for netlist node ID in the topology components
+            for(json& comp: TopologyDB::topology_list[topology_index]["components"]) {
+
+                // return netlist node ID if found
+                if(comp["netlist"][id] != nullptr) {
+                    return comp;
+                }
             }
+            return nullptr; // no netlist node ID found
         }
     }
 

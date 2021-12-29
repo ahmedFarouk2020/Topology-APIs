@@ -14,8 +14,7 @@ private:
     
 
 public:
-    Topology(){}
-    Topology(json topology){
+    Topology(json topology = nullptr){
         this-> topology = topology;
     }
 
@@ -26,7 +25,7 @@ public:
      * 
      * return: void
      */
-    void create(json topology){
+    void create(json topology) override {
         // store topology ID
         this-> topology = topology;
 
@@ -42,7 +41,7 @@ public:
      * OR
      *      nullptr -> no matching data
      */ 
-    json retrieve(string topologyId) {
+    json retrieve(string& topologyId) override {
         int index = this->search(topologyId);
         if(index >= 0)
             return TopologyDB::topology_list[index];

@@ -10,25 +10,38 @@ private:
     Topology topology;
     ComponentList component_list;
 
+    string generateFilename(string& topology_ID) {
+        return topology_ID + ".json";
+    }
+
 public:
     /******* Read json file and store the content in memory(topologyList)
      * Args: 
      *      filename(string)
      * return: 
      *      filename(Result): filename of the source file
+     * OR
+     *      null(string): invalid file name
      */
     Result readJSON(std::string filename) {
 
         // read content using ifstream object
         ifstream i_file(filename);
 
-        // store the content as json object
-        this->topology.create(json::parse(i_file));
+        if (!i_file)  // file not exist
+        {
+            return "null";
+        }
+        else   // file exists
+        {
+            // store the content as json object
+            this->topology.create(json::parse(i_file));
 
-        // add the content(topology) to memory (TopologyList) 
-        this->topology.append();
+            // add the content(topology) to memory (TopologyList) 
+            this->topology.append();
 
-        return filename;
+            return filename;
+        }
 
     }
 
@@ -39,17 +52,27 @@ public:
      *      filename(string)
      * return: 
      *      filename(Result): filename of the saved file
+     * OR
+     *      null(string): invalid topology Id
      */
     Result writeJSON(string topology_ID) {
 
         // generate filename <topologyId>.json
-        string filename = topology_ID + ".json";
+        string filename = this->generateFilename(topology_ID);
 
-        ofstream o_file(filename);
+        json topology = this->topology.retrieve(topology_ID);
 
-        o_file << std::setw(4) << this->topology.retrieve(topology_ID) << std::endl;
+        if(topology == nullptr) // invalid topology ID
+        {
+            return "null";
+        }
+        else // topology ID exist
+        {
+            ofstream o_file(filename);
+            o_file << std::setw(4) << topology << std::endl;
+            return filename;
+        }
 
-        return filename;
 
     }
 
@@ -87,6 +110,8 @@ public:
      * 
      * return: 
      *      Componentlist(json)
+     * OR
+     *      nullptr
      * 
      */
     Componentlist queryDevices(string topologyId) {
@@ -103,6 +128,8 @@ public:
      * 
      * return: 
      *      DeviceList(json)
+     * OR
+     *      nullptr
      * 
      */
     json queryDevicesWithNetlistNode(string topologyId, string netlistNodeId) {
