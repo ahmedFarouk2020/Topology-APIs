@@ -12,4 +12,4 @@
 - TopologyDB: represent all topologies in memory and it is inhereted by Utils
 
 # UML Design
-[UML Design](../images/TopologyAPIs_UML.png)
+[<img src="../images/TopologyAPIs_UML.png" width="600" height="800" />](../images/TopologyAPIs_UML.png)
