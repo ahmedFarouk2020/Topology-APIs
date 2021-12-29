@@ -15,7 +15,6 @@ protected:
     /*
     *** Virtual methods (interfaces) for `ComponentsList` and `Topology` classes
     */
-    virtual void create(json obj) {}
     virtual json retrieve(string& Id) { return nullptr; }
 
 

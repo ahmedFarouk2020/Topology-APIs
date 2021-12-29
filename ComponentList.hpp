@@ -1,35 +1,17 @@
 #ifndef COMPONENT_HPP_
 #define COMPONENT_HPP_
 
-
+typedef json ComponentList;
 
 /*
 *** provide all methods and data to deal with Components
  *
- *  Methods: create, retrieve, getWithNetlistNode
+ *  Methods: retrieve, getWithNetlistNode
  */
-class ComponentList: public Utils {
-private:
-    // list of all components in a topology
-    json components_list;
+class Component: public Utils {
 
-    
 protected:
-    ComponentList(json components_list = nullptr) {
-        this->components_list = components_list;
-    }
-
-    /* Store a json object locally and treat it as components_list
-     *
-     * Args: 
-     *      components_list(json)
-     * 
-     * return: void
-     */
-    void create(json components_list) override {
-        this->components_list = components_list;
-    }
-
+    Component() {}
 
     /* retrieve a components_list from memory with topology Id
      *
@@ -41,7 +23,7 @@ protected:
      * OR
      *      nullptr -> no matching data
      */ 
-    json retrieve(string& id) override {
+    ComponentList retrieve(string& id) override {
         int topology_index = search(id);
         if(topology_index < 0) {
             return nullptr;

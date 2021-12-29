@@ -27,7 +27,7 @@ protected:
      * 
      * return: void
      */
-    void create(json topology) override {
+    void create(json topology) {
         // store topology ID
         this-> topology = topology;
 

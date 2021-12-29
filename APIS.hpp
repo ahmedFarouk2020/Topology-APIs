@@ -1,7 +1,7 @@
 #if !defined(APIS_HPP_)
 #define APIS_HPP_
 
-typedef json Componentlist;
+
 typedef string Result;
 
 /*
@@ -13,7 +13,7 @@ typedef string Result;
  *                         queryDevicesWithNetlistNode
  */
 
-class APIS : protected Topology, ComponentList
+class APIS : protected Topology, Component
 {
 private:
 
@@ -122,8 +122,8 @@ public:
      *      nullptr
      * 
      */
-    Componentlist queryDevices(string topologyId) {
-        return ComponentList::retrieve(topologyId);
+    ComponentList queryDevices(string topologyId) {
+        return Component::retrieve(topologyId);
     }
 
 
@@ -140,8 +140,8 @@ public:
      *      nullptr
      * 
      */
-    json queryDevicesWithNetlistNode(string topologyId, string netlistNodeId) {
-        return ComponentList::getWithNetlistNode(topologyId,netlistNodeId);
+    ComponentList queryDevicesWithNetlistNode(string topologyId, string netlistNodeId) {
+        return Component::getWithNetlistNode(topologyId,netlistNodeId);
     }
 
 
